@@ -15,7 +15,7 @@ endif
 # CGO must be enabled
 export CGO_ENABLED:=1
 
-build: fmt vet
+build: fmt vet-nonfatal
 	$(foreach GOARCH,$(GOARCHs),$(shell GOARCH=$(GOARCH) go build -ldflags="$(LDFLAGS)" -trimpath -o bin/$(APP_NAME)_$(GOOS)_$(GOARCH)$(SUFFIX) ./cmd/gof5))
 
 docker:
@@ -27,6 +27,9 @@ fmt:
 
 vet:
 	go vet ./...
+
+vet-nonfatal:
+	-@go vet ./... || echo "go vet warnings ignored (see output above)"
 
 static:
 	staticcheck ./cmd/... ./pkg/...

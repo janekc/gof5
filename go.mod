@@ -1,6 +1,13 @@
 module github.com/kayrus/gof5
 
-go 1.23
+godebug (
+    x509negativeserial=1
+)
+
+go 1.23.0
+
+toolchain go1.24.2
+
 require (
 	github.com/IBM/netaddr v1.5.0
 	github.com/fatih/color v1.10.0

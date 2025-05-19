@@ -60,6 +60,8 @@ On MacOS run the command below to avoid a `cannot be opened because the develope
 xattr -d com.apple.quarantine ./path/to/gof5_darwin
 ```
 
+
+
 ## Windows
 
 Windows version doesn't support `pppd` driver.
@@ -115,6 +117,13 @@ Use options below to specify custom TLS parameters:
 * `--ca-cert` - path to a custom CA certificate
 * `--cert` - path to a user TLS certificate
 * `--key` - path to a user TLS key
+
+Or if you're using MacOS, you can use the `-keychain` option to specify a keychain path. The keychain item is specified by label `-keychain-label` and serial of the cert `-cert-serial` and must contain a private key and a certificate.
+You mus specify a label for the keychain item, e.g. `mycert` and a serial number of the certificate, e.g. `1234567890ABCDEF`. The serial number can be found in the Keychain Access app.
+
+```sh
+$ sudo gof5 --server server --username username --password token -keychain-label mycert -cert-serial 1234567890ABCDEF -keychain /Library/Keychains/System.keychain
+```
 
 ## Configuration
 

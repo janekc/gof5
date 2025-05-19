@@ -27,6 +27,9 @@ type Options struct {
 	SessionID     string
 	CACert        string
 	Cert          string
+	KeychainPath  string
+	KeychainLabel string
+	CertSerial    string
 	Key           string
 	CloseSession  bool
 	Debug         bool

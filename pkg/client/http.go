@@ -65,6 +65,14 @@ func tlsConfig(opts *Options, insecure bool) (*tls.Config, error) {
 		config.Certificates = []tls.Certificate{cert}
 	}
 
+	if opts.KeychainLabel != "" && opts.CertSerial != "" && opts.KeychainPath != "" {
+		cert, err := loadIdentity(opts.KeychainLabel, opts.CertSerial, opts.KeychainPath)
+		if err != nil {
+			return nil, err
+		}
+		config.Certificates = []tls.Certificate{cert}
+	}
+
 	return config, nil
 }
 
