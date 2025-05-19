@@ -118,13 +118,18 @@ Use options below to specify custom TLS parameters:
 * `--cert` - path to a user TLS certificate
 * `--key` - path to a user TLS key
 
-Or if you're using MacOS, you can use the `-keychain` option to specify a keychain path. The keychain item is specified by label `-keychain-label` and serial of the cert `-cert-serial` and must contain a private key and a certificate.
-You mus specify a label for the keychain item, e.g. `mycert` and a serial number of the certificate, e.g. `1234567890ABCDEF`. The serial number can be found in the Keychain Access app.
+
+Or if you're using MacOS, you can use the `-keychain` option to specify a keychain path. The certificate is selected by both its label (`-keychain-label`) and its serial number (`-cert-serial`). The keychain item must contain both a private key and a certificate.
+You must specify:
+- a label for the keychain item (e.g. `mylabel`)
+- the serial number of the certificate (e.g. `7f25379c533fe02fc10a0b52b1110273549f11`, as shown in Keychain Access or with the `security` command)
+- the keychain path (e.g. `/Library/Keychains/System.keychain`)
+
+Example:
 
 ```sh
-$ sudo gof5 --server server --username username --password token -keychain-label mycert -cert-serial 1234567890ABCDEF -keychain /Library/Keychains/System.keychain
+$ sudo gof5 --server server --username username --password token --keychain-label mylabel --cert-serial 7f25379c533fe02fc10a0b52b1110273549f11 --keychain /Library/Keychains/System.keychain
 ```
-
 ## Configuration
 
 You can define an extra `~/.gof5/config.yaml` file with contents:
